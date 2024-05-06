@@ -13,18 +13,14 @@ hash_table_t *hash_table_create(unsigned long int size)
 		return (NULL);
 	}
 
-	ht->array = malloc(sizeof(hash_node_t *) * size);
+	ht->array = calloc(size, sizeof(hash_node_t *));
 	if (ht->array == NULL)
 	{
 		fprintf(stderr, "Unable to allocate memory for the hash_table array \n");
-		free(ht);
 		return (NULL);
 	}
-	for (i = 0; i < size; i++)
-	{
-		ht->array[i] = NULL;
-	}
 
+	ht->count = 0;
 	ht->size = size;
 
 	return (ht);

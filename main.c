@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	
-	ht = hash_table_create(1000);
+	ht = hash_table_create(10);
 	copy = strdup(content);
 	char *token = strtok(copy, " \t\n.,?!;:\"");
 

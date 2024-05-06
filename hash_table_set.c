@@ -4,6 +4,8 @@
 #include <string.h>
 #include <strings.h>
 
+#define LOAD_FACTOR_THRESHOLD 0.7
+
 hash_node_t *create_pair(char *word)
 {
 	hash_node_t *new_node = malloc(sizeof(hash_node_t));
@@ -57,6 +59,13 @@ int hash_table_set(hash_table_t *ht, char *word)
 	}
 	new_node->next = ht->array[idx];
 	ht->array[idx] = new_node;
+	ht->count++;
+	
+	if ((double)ht->count / ht->size >= LOAD_FACTOR_THRESHOLD)
+	{
+		hash_table_resize(ht, ht->size * 2);
+		printf("Resizing happened here\n");
+	}
 
 	return (1);
 }
